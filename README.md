@@ -1,4 +1,4 @@
-# Bitcoin Price Prognosis
+# Bitcoin Price Aggregator & Next Day Trend Prognosis
 
 ## Introduction
 
