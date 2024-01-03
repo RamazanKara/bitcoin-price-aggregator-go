@@ -1,4 +1,4 @@
-package bitcoin_price_aggregator
+package price_aggregator
 
 import (
 	"encoding/json"

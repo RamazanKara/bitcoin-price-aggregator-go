@@ -1,30 +1,31 @@
 package test
 
 import (
-	"github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/bitcoin_price_aggregator"
-	"github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/bitcoin_price_prognosis"
 	"testing"
+
+	aggregator "github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/price-aggregator"
+	prognosis "github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/price-prognosis"
 )
 
 func TestPrognoseNextDayPrice(t *testing.T) {
-	testConfig := bitcoin_price_aggregator.ApiConfig()
+	testConfig := aggregator.ApiConfig()
 	currencySuffix := " " + testConfig.VsCurrency
 
 	testCases := []struct {
 		name     string
-		prices   []bitcoin_price_aggregator.BitcoinPrice
+		prices   []aggregator.BitcoinPrice
 		expected string
 		trend    string
 	}{
 		{
 			name:     "Empty Prices",
-			prices:   []bitcoin_price_aggregator.BitcoinPrice{},
+			prices:   []aggregator.BitcoinPrice{},
 			expected: "0.00" + currencySuffix,
 			trend:    "",
 		},
 		{
 			name: "Upward Trend",
-			prices: []bitcoin_price_aggregator.BitcoinPrice{
+			prices: []aggregator.BitcoinPrice{
 				{Value: "100.00"},
 				{Value: "200.00"},
 				{Value: "300.00"},
@@ -34,7 +35,7 @@ func TestPrognoseNextDayPrice(t *testing.T) {
 		},
 		{
 			name: "Downward Trend",
-			prices: []bitcoin_price_aggregator.BitcoinPrice{
+			prices: []aggregator.BitcoinPrice{
 				{Value: "300.00"},
 				{Value: "200.00"},
 				{Value: "100.00"},
@@ -44,7 +45,7 @@ func TestPrognoseNextDayPrice(t *testing.T) {
 		},
 		{
 			name: "Stable Trend",
-			prices: []bitcoin_price_aggregator.BitcoinPrice{
+			prices: []aggregator.BitcoinPrice{
 				{Value: "200.00"},
 				{Value: "200.00"},
 				{Value: "200.00"},
@@ -56,7 +57,7 @@ func TestPrognoseNextDayPrice(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			prognosis, trend, err := bitcoin_price_prognosis.PrognoseNextDayPrice(tc.prices, testConfig)
+			prognosis, trend, err := prognosis.PrognoseNextDayPrice(tc.prices, testConfig)
 			if len(tc.prices) == 0 && err == nil {
 				t.Error("Expected an error for empty price data")
 			}

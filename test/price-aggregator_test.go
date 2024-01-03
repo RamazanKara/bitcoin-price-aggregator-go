@@ -1,10 +1,11 @@
 package test
 
 import (
-	"github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/bitcoin_price_aggregator"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	aggregator "github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/price-aggregator"
 )
 
 func TestFetchBitcoinPrices(t *testing.T) {
@@ -16,12 +17,12 @@ func TestFetchBitcoinPrices(t *testing.T) {
 	defer mockServer.Close()
 
 	// Create a local config for the test
-	testConfig := bitcoin_price_aggregator.Config{
+	testConfig := aggregator.Config{
 		CoinGeckoAPIURL: mockServer.URL,
 		VsCurrency:      "eur",
 	}
 
-	prices, err := bitcoin_price_aggregator.FetchBitcoinPrices(testConfig)
+	prices, err := aggregator.FetchBitcoinPrices(testConfig)
 	if err != nil {
 		t.Fatalf("Failed to fetch Bitcoin prices: %v", err)
 	}
