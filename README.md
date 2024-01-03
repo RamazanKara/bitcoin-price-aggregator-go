@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This Go application provides historical price data for Bitcoin over the last 7 days and predicts the price for the next day, along with identifying the trend (upwards, downwards, or stable). The application fetches data from the CoinGecko API and uses a basic linear regression model for the prognosis.
+This Go application provides historical price data for Bitcoin over the last 7 days and predicts the price for the next day, along with identifying the trend (upwards, downwards, or stable). The application fetches data from the CoinGecko API and uses a linear regression model for the prognosis.
+It includes preprocessing steps to prepare the data for more accurate predictions.
 
 ## Installation
 
@@ -29,6 +30,11 @@ go run cmd/main/main.go
 ```
 
 This will output the Bitcoin prices for the last 7 days and the prognosis for the next day, including the price trend.
+You are free to also include any of the pkgs into your own application.
+
+## Data Preprocessing
+
+The application includes a preprocessing module that prepares the historical Bitcoin price data for the prognosis. This preprocessing includes handling missing values and removing outliers, providing a cleaner dataset for the prediction model.
 
 ## Testing
 
