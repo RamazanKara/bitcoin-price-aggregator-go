@@ -2,10 +2,10 @@ package bitcoin_price_prognosis
 
 import (
 	"errors"
-	"math"
-	"github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/bitcoin_price_aggregator"
-	"strconv"
 	"fmt"
+	"github.com/RamazanKara/bitcoin-price-aggregator-go/pkg/bitcoin_price_aggregator"
+	"math"
+	"strconv"
 )
 
 func PrognoseNextDayPrice(prices []bitcoin_price_aggregator.BitcoinPrice, config bitcoin_price_aggregator.Config) (string, string, error) {
